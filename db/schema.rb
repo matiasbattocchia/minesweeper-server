@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170205162125) do
 
   create_table "games", force: :cascade do |t|
     t.text     "instance"
+    t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
