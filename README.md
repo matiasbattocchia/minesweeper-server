@@ -27,7 +27,7 @@ actions needed:
 * flag question
 * unflag question
 
-new game: GET /game
+new game: GET /game?rows=count
 recover a game: GET /game/:id
 reveal: POST /game/:id/reveal?row=y&column=x
 flag: POST /game/:id/flag?row=y&column=x
@@ -36,4 +36,9 @@ unflag: POST /game/:id/unflag?row=y&column=x
 
 STOP 23:15
 START 13:00
+I had a problem with readline
+Running into serious problems with serialization.
+STOP 17:30
+START 18:15
+I wanted to use UUIDs but requires workarounds...
 
