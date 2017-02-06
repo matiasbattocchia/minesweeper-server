@@ -34,11 +34,14 @@ flag: POST /game/:id/flag?row=y&column=x
 unflag: POST /game/:id/unflag?row=y&column=x
 
 
-STOP 23:15
+STOP 23:15 (35 min)
 START 13:00
 I had a problem with readline
 Running into serious problems with serialization.
-STOP 17:30
+STOP 17:30 (4:30 + :35 =  5:05)
 START 18:15
 I wanted to use UUIDs but requires workarounds...
+Minesweeper uses weird exceptions to state the game.
+STOP 20:30 (2:15 + 5:05 = 7:20)
+
 

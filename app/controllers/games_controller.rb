@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def new
-    game = Game.create_game(params[:rows])
+    game = Game.create_game(params[:rows], params[:mines])
     render json: game
   end
 
