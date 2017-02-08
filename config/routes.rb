@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-  post 'games', to: 'games#new'
+  scope 'api' do
+    scope 'v1' do
 
-  get  'games/:id', to: 'games#recover'
+      post 'games', to: 'games#new'
 
-  put  'games/:id/reveal', to: 'games#reveal'
+      get  'games/:id', to: 'games#recover'
 
-  put  'games/:id/flag', to: 'games#flag'
+      put  'games/:id/reveal', to: 'games#reveal'
 
-  put  'games/:id/unflag', to: 'games#unflag'
+      put  'games/:id/flag', to: 'games#flag'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+      put  'games/:id/unflag', to: 'games#unflag'
+    end
+  end
 end
