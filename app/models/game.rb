@@ -27,7 +27,7 @@ class Game < ApplicationRecord
       status = 'Game over: You blew it!'
       save
     rescue RangeError
-      'Out of range'
+      status = 'Out of range'
     end
   end
 
