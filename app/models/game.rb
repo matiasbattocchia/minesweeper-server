@@ -1,7 +1,10 @@
 class Game < ApplicationRecord
   serialize :instance
 
-  def self.create_game(rows = 10, mines = rows)
+  def self.create_game(rows, mines)
+    rows  ||= 10
+    mines ||= rows
+
     minefield  = Minesweeper::Core::Minefield.new(rows)
     generator  = Minesweeper::Core::Explosives::MineCoordinatesFactory.new(Random.new)
     mine_layer = Minesweeper::Core::Explosives::MineLayer.new(minefield, generator)
@@ -13,8 +16,17 @@ class Game < ApplicationRecord
     create(instance: minefield, status: 'In play')
   end
 
-  def to_json
-    {id: id, board: instance.to_s, status: status}.to_json
+  def to_json(hash)
+    {
+      type: 'games',
+      id: id,
+      attributes: {
+        rows:   instance.row_count,
+        mines:  instance.instance_variable_get(:@all_mine_coords).size,
+        board:  instance.to_s,
+        status: status
+      }
+    }.to_json
   end
 
   def reveal_at(row, column)
@@ -24,10 +36,10 @@ class Game < ApplicationRecord
       instance.reveal_at(row, column)
       save
     rescue Minesweeper::Core::Explosives::ExplosionError
-      status = 'Game over: You blew it!'
+      self.status = 'Game over: You blew it!'
       save
     rescue RangeError
-      status = 'Out of range'
+      self.status = 'Out of range'
     end
   end
 
@@ -38,10 +50,10 @@ class Game < ApplicationRecord
       instance.flag_at(row, column)
       save
     rescue Minesweeper::Core::MinefieldSolvedError
-      status = 'Game over: You won!'
+      self.status = 'Game over: You won!'
       save
     rescue RangeError
-      status = 'Out of range'
+      self.status = 'Out of range'
     end
   end
 
@@ -52,7 +64,7 @@ class Game < ApplicationRecord
       instance.unflag_at(row, column)
       save
     rescue RangeError
-      status = 'Out of range'
+      self.status = 'Out of range'
     end
   end
 end
