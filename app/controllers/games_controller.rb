@@ -43,7 +43,7 @@ class GamesController < ApplicationController
   def validate_rows_and_mines
     begin
       # Parameters are not mandatory, these are their default values:
-      params[:rows]  ||= 5
+      params[:rows]  ||= '5'
       params[:mines] ||= params[:rows]
 
       # Parameters must be integers.
