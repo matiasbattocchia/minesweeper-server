@@ -1,86 +1,106 @@
 # Minesweeper server
 
-A minesweeper Rails 5 API. It uses https://github.com/svarlet/minesweeper-core internally.
+A minesweeper game Rails 5 API. It uses [minesweeper-core](https://github.com/svarlet/minesweeper-core) gem internally.
 
 ## API
 
-http://minesweeper-server.herokuapp.com/
+Currently hosted at http://minesweeper-server.herokuapp.com/.
 
-#### Start a new game
+### Start a new game
 
 ```http
 POST /api/v1/games
 ```
 
-Data params
+#### Data params
 
-rows=[integer]
+* **rows** — Integer, default: 5.
 Up to 10 rows are permitted.
-Optional.
-Default: 5.
-
-mines=[integer]
+* **mines** — Integer, default: equals the number of rows.
 Cannot be greater than number of cells (rows^2).
-Optional.
-Default: equals the number of rows.
 
-```http
-201 created
-
-{
-  "type": "games",
-  "id": 1,
-  "attributes": {
-    "rows": 5,
-    "mines": 5,
-    "board": "HHHHHHHHHHHHHHHHHHHHHHHHH",
-    "status": "In play"
-  }
-}
-```
-
-Board meaning: each character represents a cell.
-* H: hidden
-* [integer]: mines around count
-* F: flagged
-
-Possible statuses:
-* In play
-* Game over: You won!
-* Game over: You blew it!
-
-#### Recover a game
+### Recover a game
 
 ```http
 GET /api/v1/games/:id
 ```
 
-#### Reveal a cell
+#### URL params
+
+* **id** (required) — Integer.
+
+### Reveal a cell
 
 ```http
 PUT /api/v1/games/:id/reveal
 ```
 
-Data params
+#### URL params
 
-row=[integer]
-Required.
+Same as **recover a game**.
+
+#### Data params
+
+* **row** (required) — Integer.
 Cannot exceed the number of rows. Starts counting from 0.
-
-column=[integer]
-Required.
+* **column** (required) — Integer.
 Cannot exceed the number of columns (rows). Starts counting from 0.
 
-#### Flag a cell
+### Flag a cell (example)
 
 ```http
 PUT /api/v1/games/:id/flag?row=y&column=x
 ```
 
-#### Unflag a cell
+### Unflag a cell (example)
 
 ```http
 PUT /api/v1/games/:id/unflag?row=y&column=x
+```
+
+### Example successful response
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+
+```json
+{
+  "type": "games",
+  "id": 1,
+  "attributes": {
+    "rows": 5,
+    "mines": [[0, 1], [2, 3], [4, 5]],
+    "board": "HHFHHHH0010HHHH02HHH01HHH",
+    "status": "In play"
+  }
+}
+```
+
+**Mines**: array of mine coordinates pairs (row, column).
+
+**Board**: each character represents a cell; it is the 2D board rearranged in a single line.
+* H: hidden
+* *Integer*: mines around count
+* F: flagged
+
+**Status**: current game status.
+* In play
+* Game over: You won!
+* Game over: You blew it!
+
+### Example error response
+
+```http
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+```
+
+```json
+{
+  "error": "Parameter 'rows' is not an integer."
+}
 ```
 
 ## Challenge
