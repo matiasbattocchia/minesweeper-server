@@ -148,31 +148,28 @@ insufficient to solve everything.
 
 ## Notes
 
-I try to spend half of the time working on the server and the escond half,
-on the client.
+As the challenge had a time constraint, I did not want to implement the mechanics of the game, at least not before having the application up and running. I found a gem that does not come with a frontend which seemed good enough; it does not allow setting the number of columns (just rows) nor placing question marks on cells (just flags), though.
 
-As time is limited I am going to search a Ruby implementation of minesweeper to
-be used along Rails, which will expose an API only.
+Minesweeper classes were wrapped around Game model, the game instance coming from these saved serialized as an attribute of the model.
 
-I would love to implement it myself but I prefer to set up the app.
+Saturday 2017-02-04
 
-Start time: repository was crated on 2017-02-04 22:40.
+START 22:00
 
-Found an interesting Ruby gem:
+* Design ideas
+* Dependecies
+* Scaffolding
+* Initial commit
 
-It is useful because it does not includes an end-user interface.
+STOP  23:15
 
-It does not allow to flag a cell with a question mark.
+Sunday
 
-Create a Rails app with --api option.
-
-Now i shall focus on designing the api
-
-STOP 23:15 (35 min)
 START 13:00
 I had a problem with readline
 Running into serious problems with serialization.
 STOP 17:30 (4:30 + :35 =  5:05)
+
 START 18:15
 I wanted to use UUIDs but requires workarounds...
 Minesweeper uses weird exceptions to state the game.
