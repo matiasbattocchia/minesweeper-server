@@ -1,6 +1,7 @@
 # Minesweeper server
 
-A minesweeper game Rails 5 API. It uses [minesweeper-core](https://github.com/svarlet/minesweeper-core) gem internally. Currently hosted at http://minesweeper-server.herokuapp.com/.
+A minesweeper game Rails 5 API. It uses [minesweeper-core](https://github.com/svarlet/minesweeper-core)
+gem internally. Currently hosted at http://minesweeper-server.herokuapp.com/.
 
 ## API
 
@@ -78,7 +79,8 @@ Content-Type: application/json
 
 **Mines**: array of mine coordinates pairs (row, column).
 
-**Board**: each character represents a cell; it is the 2D board rearranged in a single line.
+**Board**: each character represents a cell; it is the 2D board rearranged in
+a single line.
 * H: hidden
 * *Integer*: mines around count
 * F: flagged
@@ -146,46 +148,66 @@ insufficient to solve everything.
 
 ## Notes
 
-As the challenge had a time constraint, I did not want to implement the mechanics of the game, at least not before having the application up and running. I found a gem that does not come with a frontend which seemed good enough; it does not allow setting the number of columns (just rows) nor placing question marks on cells (just flags), though.
+As the challenge had a time constraint, I did not want to implement the
+mechanics of the game, at least not before having the application up and
+running. I found a gem that does not come with a front-end which seemed good
+enough; it does not allow setting the number of columns (just rows) nor
+placing question marks on cells (just flags), though.
 
-Minesweeper classes were wrapped around Game model, the game instance coming from these saved serialized as an attribute of the model.
+Minesweeper classes were wrapped around Game model, the game instance coming
+from these saved serialized as an attribute of the model.
 
-I wanted to use UUIDs (or other long ids) as the Game resource identifier (much as GitHub Gist's id) but this is not straightforward in Rails so I left this idea behind. 
+I created a Rails API-only application. I thought this would be enough for
+the task; at the end I had to implement validations and error handling for
+the API by hand. I should have pulled an API framework such as Grape.
 
 I borrowed some recommendations from the JSON API specification.
 
-Saturday 2017-02-04
+The [minesweeper client](https://github.com/matiasbattocchia/minesweeper-client)
+is meant to be done with [Löve](https://love2d.org) 2D game framework in Lua.
+
+Left undone were *authentication* and the *User model*.
+
+## Time spent
+
+**Saturday**, 4 Feb
 
 START 22:00 - STOP 23:15
 
 * Design ideas
-* Dependecies
+* Dependencies
 * Scaffolding
 * Initial commit
 
-Sunday 2017-02-05
+**Sunday**, 5 Feb
 
 START 13:00 - STOP 17:30
 
-* Dealt with a serious problem regarding serialization, ended patching minesweeper-core gem.
+* Game model
+* Games controller
+* Routes
 
 START 18:15 - STOP 20:30
 
-Wednesday 2017-02-08
+* Dealt with a serious problem regarding serialization, ended patching minesweeper-core gem.
+
+**Done with the bulk of the work.** Total time: 8 hours.
+
+**Wednesday**, 8 Feb
 
 * Minor API improvement
 * Rails configuration for Heroku
 
-Thursday 2017-02-09
+**Thursday**, 9 Feb
 
 * Model refactoring
 * Better JSON responses
 
-Friday 2017-02-10
+**Friday**, 10 Feb
 
 * Request validations at controller
 * Heroku deployment
 
-Saturday/Sunday 2017-02-11/12
+**Saturday/Sunday**, 11/12 Feb
 
 * Documentation
