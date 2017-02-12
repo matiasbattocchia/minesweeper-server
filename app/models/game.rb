@@ -17,7 +17,7 @@ class Game < ApplicationRecord
       id: id,
       attributes: {
         rows:   rows,
-        mines:  mines,
+        mines:  mines_coords,
         board:  board,
         status: status
       }
@@ -59,8 +59,8 @@ class Game < ApplicationRecord
     instance.row_count
   end
 
-  def mines
-    instance.instance_variable_get(:@all_mine_coords).size
+  def mines_coords
+    instance.instance_variable_get(:@all_mine_coords)
   end
 
   def board
