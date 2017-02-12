@@ -1,10 +1,8 @@
 # Minesweeper server
 
-A minesweeper game Rails 5 API. It uses [minesweeper-core](https://github.com/svarlet/minesweeper-core) gem internally.
+A minesweeper game Rails 5 API. It uses [minesweeper-core](https://github.com/svarlet/minesweeper-core) gem internally. Currently hosted at http://minesweeper-server.herokuapp.com/.
 
 ## API
-
-Currently hosted at http://minesweeper-server.herokuapp.com/.
 
 ### Start a new game
 
@@ -152,29 +150,42 @@ As the challenge had a time constraint, I did not want to implement the mechanic
 
 Minesweeper classes were wrapped around Game model, the game instance coming from these saved serialized as an attribute of the model.
 
+I wanted to use UUIDs (or other long ids) as the Game resource identifier (much as GitHub Gist's id) but this is not straightforward in Rails so I left this idea behind. 
+
+I borrowed some recommendations from the JSON API specification.
+
 Saturday 2017-02-04
 
-START 22:00
+START 22:00 - STOP 23:15
 
 * Design ideas
 * Dependecies
 * Scaffolding
 * Initial commit
 
-STOP  23:15
+Sunday 2017-02-05
 
-Sunday
+START 13:00 - STOP 17:30
 
-START 13:00
-I had a problem with readline
-Running into serious problems with serialization.
-STOP 17:30 (4:30 + :35 =  5:05)
+* Dealt with a serious problem regarding serialization, ended patching minesweeper-core gem.
 
-START 18:15
-I wanted to use UUIDs but requires workarounds...
-Minesweeper uses weird exceptions to state the game.
-STOP 20:30 (2:15 + 5:05 = 7:20)
+START 18:15 - STOP 20:30
 
-START 19:00
-Some API guidelines lectures.
-STOP 20:30
+Wednesday 2017-02-08
+
+* Minor API improvement
+* Rails configuration for Heroku
+
+Thursday 2017-02-09
+
+* Model refactoring
+* Better JSON responses
+
+Friday 2017-02-10
+
+* Request validations at controller
+* Heroku deployment
+
+Saturday/Sunday 2017-02-11/12
+
+* Documentation
